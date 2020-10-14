@@ -23,6 +23,12 @@ var UDClientwindow UserWindow;
 
 var bool bInitialized; //on init.
 
+// Neon_Knight: Localization Strings
+var localized string StartLabel;
+var localized string AutoRecordLabel;
+var localized string PathsLabel;
+var localized string DownloadingLabel;
+
 function Created()
 {
   local UMenuPageControl pages;
@@ -66,10 +72,10 @@ function Created()
   Pages = UMenuPageControl(VSplitterL.CreateWindow(class'UMenuPageControl', 0, 0, HSplitter.splitpos, VSplitterL.splitpos));
   Pages.SetMultiLine(true); //change?
   VSplitterL.TopClientWindow=Pages;
-  UserWindow=UDClientwindow(Pages.AddPage("Start", class'UDClientwindow').Page);
-  Pages.AddPage("Auto-Record", class'UDFeaturesClient');
-  Pages.AddPage("Paths", class'UDPathsClient');
-  Pages.AddPage("Downloading", class'UDNetSettingsClient');
+  UserWindow=UDClientwindow(Pages.AddPage(StartLabel, class'UDClientwindow').Page);
+  Pages.AddPage(AutoRecordLabel, class'UDFeaturesClient');
+  Pages.AddPage(PathsLabel, class'UDPathsClient');
+  Pages.AddPage(DownloadingLabel, class'UDNetSettingsClient');
   bInitialized=true;
 }
 //called when reopened:
@@ -83,4 +89,8 @@ function Paint(Canvas C, float X, float Y)
 }
 
 defaultproperties {
+	StartLabel="Start"
+	AutoRecordLabel="Auto-Record"
+	PathsLabel="Paths"
+	DownloadingLabel="Downloading"
 }
