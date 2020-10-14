@@ -15,6 +15,8 @@ class AutoRecorder expands UWindowWindow;
 var UDClientWindow Udemo;      //
 var OldSkoolHack   Hack;       //
 var bool           bIsPlaying; // tells if it is actually a demo playing :p
+var localized string LevelChangedNoAutoRecordLog;
+var localized string LevelChangedAutoRecordLog;
 
 // =============================================================================
 // NotifyBeforeLevelChange ~ Called before the actual levelchange (duh?)
@@ -56,13 +58,13 @@ function NotifyLevelChange()
     // (Anth) Added option to prevent recording when spectating
     if (bIsPlaying || GetLevel() == GetEntryLevel() || (GetPlayerOwner().GetDefaultURL("OverrideClass") ~= "Botpack.CHSpectator" && !class'DemoSettings'.default.bRecordWhenSpectating))
     {
-        Log("UDEMO: Level changed but udemo won't auto-record");
+        Log(LevelChangedNoAutoRecordLog);
         return;
     }
     if (class'DemoSettings'.static.ShouldRecord(GetLevel()))
     {
         DemoCmd = "demorec "$class'DemoSettings'.static.GetRecordingDir()$class'DemoSettings'.static.GetDemoName(GetPlayerOwner(),UWindowComboListItem(Udemo.Demos.List.Items));
-        Log("UDEMO: Level changed. Auto-Recording started:"@DemoCmd);
+        Log(LevelChangedAutoRecordLog@DemoCmd);
         getplayerowner().consolecommand(DemoCmd);
     }
 }
@@ -73,4 +75,6 @@ function NotifyLevelChange()
 defaultproperties
 {
     bTransient=true
+    LevelChangedNoAutoRecordLog="UDEMO: Level changed but udemo won't auto-record"
+    LevelChangedAutoRecordLog="UDEMO: Level changed. Auto-Recording started:"
 }
