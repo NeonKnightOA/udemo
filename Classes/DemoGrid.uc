@@ -13,6 +13,11 @@ class DemoGrid expands UWindowGrid;
 var UWindowGridColumn InstalledColumn;
 var int               InstallWidth;
 var localized string  InstallType[3];
+var localized string PackageNameLabel;
+var localized string FileSizeLabel;
+var localized string InstalledLabel;
+var localized string CachedLabel;
+
 
 // =============================================================================
 // Created ~
@@ -23,15 +28,15 @@ function Created()
 
     RowHeight = 12;
 
-    AddColumn("Package Name", 150);
-    AddColumn("File Size", 50);
+    AddColumn(PackageNameLabel, 150);
+    AddColumn(FileSizeLabel, 50);
 
-    InstalledColumn=AddColumn("Installed?", winwidth-214);
+    InstalledColumn=AddColumn(InstalledLabel, winwidth-214);
     InstallWidth=winwidth-214;
 
     //setup install string
     InstallType[0]=string(false);
-    InstallType[1]="Cached";
+    InstallType[1]=CachedLabel;
     InstallType[2]=string(true);
 }
 
@@ -146,4 +151,8 @@ function SelectRow(int Row)
 // =============================================================================
 defaultproperties
 {
+	PackageNameLabel="Package Name"
+	FileSizeLabel="File Size"
+	InstalledLabel="Installed?"
+	CachedLabel="Cached"
 }
