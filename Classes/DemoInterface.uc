@@ -29,6 +29,9 @@ var config string IllegalActors[20];
 var config bool bDebug;
 var config bool bAnthDebug;
 
+// (Neon_Knight) Localization strings
+var localized string TryingToLinkToPlayerLabel;
+
 //native functions:
 native final function SetSpeed (float newSpeed); //playback speed control
 native final function JumpBack (); //jumps all the way back to beginning (at starttime). deletes most actors!
@@ -100,7 +103,7 @@ event LinkToPlayer (PlayerPawn p, bool LockOn)
         LockOn=false;
 
     if (bDebug)
-        Log("UDEMO: Trying to link to player :"@p);
+        Log(TryingToLinkToPlayerLabel@p);
 
     if (!DemoPlaybackSpec(DemoSpec).bInit)
     {
@@ -117,3 +120,8 @@ event LinkToPlayer (PlayerPawn p, bool LockOn)
 }
 
 event NetPacketReceived(); //called each packet if message grabbing
+
+defaultproperties
+{
+	TryingToLinkToPlayerLabel="UDEMO: Trying to link to player: "
+}
